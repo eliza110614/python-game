@@ -1,7 +1,7 @@
 import random
 
 # welcome user
-name = input("What is your name?")
+name = input("What is your name? ")
 print("Hello, " + name, "Let's play Hangman")
 print("")
 
@@ -12,8 +12,7 @@ hangman_graphics = ['__\n |\n O',
                    '__\n |\n O\n |',
                    '__\n |\n O\n/|',
                    '__\n |\n O\n/|\ ',
-                   '__\n |\n O\n/|\ \n/ \ '
-                   ]
+                   '__\n |\n O\n/|\ \n/ \ ']
 
 number_mistakes = 0
 letters_guessed = []
@@ -21,6 +20,7 @@ number_mistakes_allowed = len(hangman_graphics)
 word = random.choice(words)
 letters_word = list(word)
 wrong_letters = []
+word_guessed = word
 
 print()
 print('The word has {} letters'.format(len(letters_word)))
@@ -37,13 +37,14 @@ while number_mistakes < number_mistakes_allowed:
     print()
     print('You have already entered this letter, try again')
     letter_user = input('Enter a letter = ')
-
+  
   if letter_user not in letters_word:
     number_mistakes += 1
     wrong_letters.append(letter_user)
 
   print()
-  print('Word: ', end='')
+  word_guessed == word
+  print('Word ', end='')
 
   for letter in letters_word:
     if letter_user == letter:
@@ -61,20 +62,24 @@ while number_mistakes < number_mistakes_allowed:
   print()
   print('.............................................')
 
-  if len(letters_guessed) == len(letters_word):
+if number_mistakes <= number_mistakes_allowed:
+  letter_user = input('Enter a letter = ')
+
+if word == word_guessed:
       print()
       print('Congratulations, you won!')
-  break
 
 if number_mistakes == number_mistakes_allowed:
   print()
   print('You lost, try again')
 
 def game():
-  again = input ('Play again? ' + name)
-  if again == 'y':
+  print("yay! you won!")
+  again = input("Play again? (y/n)")
+  # als je wil, nog een keer spelen
+  if again == "y":
     game()
-  else: 
-    print('The End')
+  else:
+    print("THE END")
 
 game()
