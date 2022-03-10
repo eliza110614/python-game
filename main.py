@@ -2,8 +2,10 @@ import random
 
 # welcome user
 name = input("What is your name? ")
-print("Hello, " + name, "let's play Hangman")
-print("")
+print("Hello, " + name, "let's play Hangman!")
+print("You have to correctly guess a word by entering letters.")
+print("Try not to get hanged though, since you've got a limited amount of chances.")
+print("Good luck " + name,"!")
 
 # optional words
 words = ["informatica", "informatiekunde", "spelletje", "aardigheidje", "scholier", "fotografie", "waardebepaling", "specialiteit", "verzekering", "universiteit", 'heesterperk']
@@ -23,6 +25,7 @@ number_mistakes_allowed = len(hangman_graphics)
 word = random.choice(words)
 letters_word = list(word)
 wrong_letters = []
+possible_input_letters = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o" "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 
 # number of letters in the word
 print()
@@ -43,6 +46,9 @@ while number_mistakes < number_mistakes_allowed:
     # multiple entered letters
     print('You have already entered this letter, try again')
     guess = input('Enter a letter: ')
+  while guess != possible_input_letters:
+    print()
+    print("Invalid input. Try a letter of the alphabet")
 
   # number of mistakes made
   if guess not in letters_word:
@@ -81,8 +87,20 @@ if number_mistakes <= number_mistakes_allowed:
 # end of the game -> win or loose
 if number_mistakes == number_mistakes_allowed:
   print()
+  print("__\n |\n* *\n/|\ \n/ \ ")
   print("You have been hanged :(")
   print("The correct word is:", word)
-  print('Do you want to try again?')
 else:
   print("Congratulations, you won!")
+
+# re-executing game when first round ends
+def play_loop():
+  print("Do you want to play again?")
+  play_game = input("Enter: 'yes' if you do. Enter 'no' if you don't.")
+  while play_game not in ["yes", "no", "YES", "NO", "Yes", "No", "yEs", "nO", "yeS", "YEs", "YeS", "yES"]:
+    play_game = input("Enter: 'yes' if you do. Enter 'no' if you don't.")
+  if play_game == "yes":
+    main()
+  elif play_game == "no":
+    print("Thanks for playing Hangman!")
+    exit()
