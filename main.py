@@ -4,7 +4,7 @@ import random
 name = input("What is your name? ")
 print("Hello, " + name, "let's play Hangman!")
 print("You have to correctly guess a word by entering letters.")
-print("Try not to get hanged though, since you've got a limited amount of chances.")
+print("Try not to get hanged though, since you've got a limited amount of guesses.")
 print("Good luck " + name,"!")
 
 # optional words
@@ -44,7 +44,7 @@ while True:
     while guess in letters_guessed or guess in wrong_letters:
       print()
       # multiple entered letters
-      print('You have already entered this letter, try again')
+      print('You have already entered this character, try again')
       guess = input('Enter a letter: ')
     if len(guess) != 1 or not guess.isalpha():
       print()
@@ -56,9 +56,19 @@ while True:
       number_mistakes += 1
       wrong_letters.append(guess)
 
+    # printing the hangman graphics with every mistake made
+    print()
+    if number_mistakes:
+      print(hangman_graphics[number_mistakes - 1])
+    print()
+    # organizing the game, so it is uncluttered
+    print('.............................................')
+
     # printing the word in the game
     print()
     print('Word: ', end='')
+    global b
+    b = 1
 
     # showing correctly guessed letters in the word
     for letter in letters_word:
@@ -70,18 +80,18 @@ while True:
         print(letter + ' ', end='')
       # showing incorrectly guessed letters as dashes
       else:
-        print('_ ', end='')
+        dash = print('_ ', end='')
+        b = 2
 
-    # printing the hangman graphics with every mistake made
-    print()
-    if number_mistakes:
-      print(hangman_graphics[number_mistakes - 1])
-    print()
-    # organizing the game, so it eyes uncluttered
-    print('.............................................')
+    if b == 2:
+      continue
+    elif b == 1:
+      print()
+      print("Congratulations, you won!")
+      break
 
   # able to keep entering letters if you haven't made the maximum amount of mistakes
-  if number_mistakes <= number_mistakes_allowed:
+  if number_mistakes < number_mistakes_allowed:
     guess = input('Enter a letter = ')
 
   # end of the game -> win or loose
@@ -90,13 +100,13 @@ while True:
     print("__\n |\n* *\n/|\ \n/ \ ")
     print("You have been hanged :(")
     print("The correct word is:", word)
-  if guess == word:
-    print()
-    print("Congratulations, you won!")
-
+    
   # re-executing game when first round ends
-  endgame = input("Do you want to play again? Enter y if yes, n if no").lower()
-  if endgame == y:
-    print()
-    print("Let's play Hangman again!")
-  continue
+  def endgame():
+    again = input("Do you want to play again? Enter y if yes, n if no ").lower()
+  # als je wil, nog een keer spelen
+  if again == "y":
+    endgame()
+  else:
+    print("THE END")
+  break
