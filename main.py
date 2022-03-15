@@ -29,6 +29,7 @@ while True:
   word = random.choice(words)
   letters_word = list(word)
   wrong_letters = []
+  wrong_letters.sort()
 
   # number of letters in the word
   print()
@@ -41,8 +42,9 @@ while True:
     print("Wrong letters: ", end= "")
     for letter in wrong_letters:
       print("{}, ".format(letter), end= "")
-    print()
+      
     # less guesses because the player entered a wrong character
+    print()
     print("Guesses left: {}".format(number_mistakes_allowed - number_mistakes))
     guess = input("Enter a letter: ")
    
@@ -114,7 +116,10 @@ while True:
     print("The correct word is:", word)
     
   # re-executing game when round ends
-  endgame = input("Do you want to play again? Enter y if yes, n if no: ").lower()
+  # use of concatenations
+  a = "Do you want to play again?"
+  b = "Enter y if yes, n if no: "
+  endgame = input(a + " " + b).lower()
   if endgame == "n":
     print()
     print ("Thanks for playing Hangman!")
