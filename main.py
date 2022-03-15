@@ -5,10 +5,12 @@ while True:
   
   # welcome user and give the instructions on how to play the game
   name = input("What is your name? ")
+  message_one = "You have to correctly guess a word by entering lowercase letters."
+  message_two = "Try not to get hanged though, since you've got a limited amount of guesses."
   print()
   print("Hello, " + name, "let's play Hangman!")
-  print("You have to correctly guess a word by entering lowercase letters.")
-  print("Try not to get hanged though, since you've got a limited amount of guesses.")
+  print(message_one)
+  print(message_two)
   print("Good luck " + name,"!")
   
   # optional words
